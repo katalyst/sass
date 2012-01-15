@@ -160,7 +160,7 @@ class Sass::Tree::Visitors::Perform < Sass::Tree::Visitors::Base
 
   # Runs a mixin.
   def visit_mixin(node)
-    handle_include_loop!(node) if @environment.mixins_in_use.include?(node.name)
+    handle_include_loop!(node) if @environment.mixins_in_use.count(node.name) > 10
 
     original_env = @environment
     original_env.push_frame(:filename => node.filename, :line => node.line)
